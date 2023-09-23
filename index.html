@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R/P/S Game</title>
+    <style>        
+    h1{
+        animation:h1ani;
+        animation-duration:2s;
+        animation-iteration-count:infinite;
+    }
+    @keyframes h1ani{
+        33%{
+            transform:scale(1);
+        }
+        67%{
+            transform:scale(1.5);
+        }
+        100%{
+            transform:scale(1);
+        }
+    }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body bgcolor="black" class="text-white font-mono">
+    <div class="font-bold text-xl">
+    <h1 class="text-center text-4xl underline hover:text-blue-500 font-mono">
+        <a href="/" target="_blank" class="font-bold hover:shadow:2xl">Rock Paper Scissors</a>
+    </h1><br>
+    <h2 class="bg-white text-black p-2 font-mono text-center" id="datetime"> </h2><br><br>
+    <div class="text-center underline">Your Score :- <span id="uscore"></span></div><br>
+    <div class="text-center underline">Computer Score :- <span id="cscore"></span></div><br>
+    <div class="text-center"><label>Enter Your Choice ( Rock / Paper / Scissors )</label></div><br>
+    <input type="text" id="ui" class="text-center block mx-auto bg-transparent border-b-2 border-green-300 border-solid"><br>
+    <button class="bg-gradient-to-r from-purple-500 to-cyan-500 text-center p-3 text-black rounded-2xl hover:text-white block mx-auto" id="subbut">Submit</button>
+    <br><br>
+    <div class="text-center bg-white text-blue-500">Description
+        <span id="prompt" class="p-3 font-bold"></span>
+    </div>
+    <br><br>
+    <div class="text-center bg-gray text-red-500">Result :- <span id="result" class="font-bold p-2"></span></div>
+    <br>
+    <div class="bg-gray-500 text-green-400 text-center">Ayush Verma</div>
+</div>
+    <script>
+        let dp = document.getElementById("prompt");
+        let resultfield = document.getElementById("result");
+        let choice = ["Rock","Paper","Scissors"];
+        function datetime(){
+            const date = new Date();
+            document.getElementById("datetime").innerText = date;
+        }
+        setInterval(datetime,1000);
+        let uscore = 0;
+        document.getElementById("uscore").innerText = uscore;
+        let cscore = 0;
+        document.getElementById("cscore").innerText = cscore;
+        document.getElementById("subbut").onclick = function(){
+            let ui = String(document.getElementById("ui").value);
+            ui = ui.trim();
+            if (ui=="Rock"||ui=="Paper"||ui=="Scissors"){
+                let ci = Math.floor(Math.random()*3);
+                let cc = choice[ci];
+                if (cc=="Rock"&&ui=="Rock"){
+                    dp.innerText = "You and Computer both choose Rock"; 
+                    resultfield.innerText = "Tie !";
+                }
+                else if (cc=="Rock"&&ui=="Scissors"){
+                    dp.innerText = "Computer Choose Rock and You Choose Scissors";
+                    resultfield.innerText = "Computer Wins !";
+                    cscore++;
+                    document.getElementById("cscore").innerText = cscore;
+                }
+                else if (cc=="Rock"&&ui=="Paper"){
+                    dp.innerText = "Computer Choose Rock and You Choose Paper";
+                    resultfield.innerText = "You Wins !";
+                    uscore++;
+                    document.getElementById("uscore").innerText = uscore;
+                }
+                else if (cc=="Scissors"&&ui=="Scissors"){
+                    dp.innerText = "You and Computer both choose Scissors "; 
+                    resultfield.innerText = "Tie !"
+                }
+                else if (cc=="Scissors"&&ui=="Rock"){
+                    dp.innerText = "Computer Choose Scissors and You Choose Rock"
+                    resultfield.innerText = "You Wins !"
+                    uscore++;
+                    document.getElementById("uscore").innerText = uscore;
+                }
+                else if (cc=="Scissors"&&ui=="Paper"){
+                    dp.innerText = "Computer Choose Scissors and You Choose Paper";
+                    resultfield.innerText = "Computer Wins !";
+                    cscore++;
+                    document.getElementById("cscore").innerText = cscore;
+                }
+                else if (cc="Paper"&&ui=="Paper"){
+                    dp.innerText = "You and Computer both choose Paper"; 
+                    resultfield.innerText ="Tie !";
+                }
+                else if (cc="Paper"&&ui=="Rock"){
+                    dp.innerText = "Computer Choose Paper and You Choose Rock";
+                    resultfield.innerText ="Computer Wins !";
+                    cscore++;
+                    document.getElementById("cscore").innerText = cscore;
+                }
+                else if (cc="Paper"&&ui=="Scissors"){
+                    dp.innerText = "Computer Choose Paper and You Choose Scissors"
+                    resultfield.innerText ="You Wins !"
+                    uscore++;
+                    document.getElementById("uscore").innerText = uscore;
+                }
+            }
+            else{
+                alert("Enter A Valid KeyWord")
+            }
+        }
+    </script>
+</body>
+</html>
